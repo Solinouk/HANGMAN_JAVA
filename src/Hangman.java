@@ -7,20 +7,20 @@ import java.util.Random;
 public class Hangman {
 
     String word;
-    char[] list_word ;
+    char[] list_word;
     String letter;
-    char good_letter ;
-    Boolean correct ;
+    char good_letter;
+    Boolean correct;
     ArrayList<Integer> index = new ArrayList<Integer>();
     ArrayList<String> words_list = new ArrayList<String>();
     String pickWord;
     int count = 0;
-    Random nb ;
+    Random nb;
 
     public Hangman() {
     }
 
-//    The file where french words 8 letters long are listed in.
+    //    The file where french words 8 letters long are listed in.
     private File file = new File("/home/solenne/Documents/GITHUB/HANGMAN_JAVA/src/words_8_letters.txt");
     Scanner sc;
 
@@ -31,7 +31,6 @@ public class Hangman {
             e.printStackTrace();
         }
     }
-
 
 
     public void chose_word() {
@@ -56,26 +55,37 @@ public class Hangman {
 
 //        correct = word.contains(letter);
 
-        for (int i = 0 ;  i < word.length() ; i++) {
+        for (int i = 0; i < word.length(); i++) {
 
-            list_word= word.toCharArray();
+            list_word = word.toCharArray();
 
-            if (list_word[i] == letter){
-                good_letter = letter ;
+            if (list_word[i] == letter) {
+                good_letter = letter;
                 index.add(i);
-                correct = true ;
-            }
-            else {
-                System.out.println("Dommage...");
-                correct = false;
             }
         }
+        if (index.isEmpty()) {
+
+            correct = false;
+            System.out.println("Dommage...");
+
+        } else {
+
+            correct = true;
+            System.out.println("Bravo !");
+
+        }
+
     }
 
-    public void display_word(){
 
-
-    }
+//    public void display_word(String word, ArrayList displayed) {
+//
+//
+//
+//
+//
+//    }
 
     public char getGood_letter() {
         return good_letter;
