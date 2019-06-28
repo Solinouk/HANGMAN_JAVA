@@ -79,13 +79,19 @@ public class Hangman {
     }
 
 
-//    public void display_word(String word, ArrayList displayed) {
-//
-//
-//
-//
-//
-//    }
+    public void display_word(String word, char[] displayed) {
+        System.out.println(index);
+        for (int i : index) {
+            displayed[i]= good_letter;
+
+
+        }
+        System.out.println(displayed);
+
+
+
+
+    }
 
     public char getGood_letter() {
         return good_letter;
