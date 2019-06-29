@@ -8,7 +8,6 @@ public class Hangman {
 
     String word;
     char[] list_word;
-    String letter;
     char good_letter;
     Boolean correct;
     ArrayList<Integer> index = new ArrayList<Integer>();
@@ -16,10 +15,12 @@ public class Hangman {
     String pickWord;
     int count = 0;
     Random nb;
-    int tries ;
-    char rejoue;
-    char rejouer ;
+    int trials;
+    char repl;
+    char replay;
+    Boolean over = false;
     private Scanner sc = new Scanner(System.in);
+
 
     public  Hangman() {
     }
@@ -36,7 +37,7 @@ public class Hangman {
         }
     }
 
-
+// chose a word randomly in a file
     public void chose_word() {
 
         while (scan.hasNext()) {
@@ -47,15 +48,15 @@ public class Hangman {
         nb = new Random();
         int n = nb.nextInt(count);
         pickWord = words_list.get(n);
-        System.out.println(pickWord);
+
     }
 
 
-
-
+    //        check if the letter chosen by the player is in the word and store the index of
+    //        the good letter and the letter itself
     public void check_letter(char letter, String word) {
         index.clear();
-//        check if the letter chosen by the player is in the word and store the index of the good letter and the letter itself
+
         for (int i = 0; i < word.length(); i++) {
             list_word = word.toCharArray();
 
@@ -78,7 +79,6 @@ public class Hangman {
 
 //    replace each hidden letter by the good letter. If no letter matches, nothing change
     public char[] display_word(String word, char[] displayed) {
-        System.out.println(index);
         for (int i : index) {
             displayed[i]= good_letter;
         }
@@ -88,46 +88,45 @@ public class Hangman {
 
 
 //    check if the game is finished
-    public void game_over(String word, char[] displayed, int tries){
-//        rejouer = 'n';
+    public int game_over(String word, char[] displayed, int trials){
+
         correct = getCorrect();
 //        if letter is correct, nomber of trials don't change
             if (correct) {
                 System.out.println("bravo, vous avez trouvé une lettre du mot. ");
-//                then check if the word is correct
-//                in case it is, ask the player if he wants to play again
+//                then check if the word is correct. In this case, the game is finished
+
                 if (Arrays.equals(displayed, word.toCharArray())){
                     System.out.println(" Vous avez trouvé le bon mot !");
-                    System.out.println("Voulez-vous rejouer ? 'o' ");
-                    rejoue = sc.next().charAt(0);
-                    System.out.println(rejoue);
-                    rejouer = Character.toLowerCase(rejoue);
-                }
-                else {
-                    return ;
+                    over = true;
                 }
             }
 // if letter is not correct
             else{
 //              number of trials decreases
-                tries -= 1;
-                System.out.println(tries);
+                trials -= 1;
+                System.out.println(trials);
                 System.out.println("La lettre n'est pas dans le mot");
 //                then if there's no trials anymore, ask player if he wants to play again
-                if (tries == 0) {
+                if (trials == 0) {
                     System.out.println("Vous avez perdu. Le mot était " + word + ".");
-                    System.out.println("Voulez-vous rejouer ? 'o' ");
-                    rejoue = sc.next().charAt(0);
-                    rejouer = Character.toLowerCase(rejoue);
-
+                    over = true;
                 }
 //                then if there are still some trials, indicates how many trials remain
-                if (tries > 0) {
-                    System.out.println("Il vous reste " + tries + " essais.");
+                if (trials > 0) {
+                    System.out.println("Il vous reste " + trials + " essais.");
                 }
             }
-        
+        return trials;
         }
+
+//        if game is finished, ask player if he wants to play again
+    public char replay() {
+        System.out.println("Voulez-vous replay ? 'o' ");
+        repl = sc.next().charAt(0);
+        replay = Character.toLowerCase(repl);
+        return replay;
+    }
 
 
 
@@ -140,14 +139,20 @@ public class Hangman {
 
     public ArrayList<Integer> getIndex() {return index;}
 
-    public char getRejouer() {return rejouer;}
+    public char getReplay() {
+        return replay;
+    }
 
-    public int getTries() {
-        return tries;
+    public int getTrials() {
+        return trials;
+    }
+
+    public Boolean getOver() {
+        return over;
     }
 }
 
 
-
-
-
+//
+//
+//;
