@@ -4,11 +4,9 @@ public class Player {
 
     String name;
     int score;
-
     char let ;
     char letter ;
-    public Scanner sc = new Scanner(System.in);
-
+    private Scanner sc = new Scanner(System.in);
 
     public Player(String name, int score) {
         this.name = name;
