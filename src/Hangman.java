@@ -6,19 +6,19 @@ import java.util.Random;
 
 public class Hangman {
 
-    String word;
-    char[] list_word;
-    char good_letter;
-    Boolean correct;
-    ArrayList<Integer> index = new ArrayList<Integer>();
-    ArrayList<String> words_list = new ArrayList<String>();
-    String pickWord;
-    int count = 0;
-    Random nb;
-    int trials;
-    char repl;
-    char replay;
-    Boolean over = false;
+    private  String word;
+    private char[] list_word;
+    private char good_letter;
+    private Boolean correct;
+    private ArrayList<Integer> index = new ArrayList<Integer>();
+    private ArrayList<String> words_list = new ArrayList<String>();
+    private String pickWord;
+    private int count = 0;
+    private Random nb;
+    private int trials;
+    private char repl;
+    private char replay;
+    private Boolean over = false;
     private Scanner sc = new Scanner(System.in);
 
 
@@ -37,7 +37,7 @@ public class Hangman {
         }
     }
 
-// chose a word randomly in a file
+    // chose a word randomly in a file
     public void chose_word() {
 
         while (scan.hasNext()) {
@@ -77,7 +77,7 @@ public class Hangman {
         }
     }
 
-//    replace each hidden letter by the good letter. If no letter matches, nothing change
+    //replace each hidden letter by the good letter. If no letter matches, nothing change
     public char[] display_word(String word, char[] displayed) {
         for (int i : index) {
             displayed[i]= good_letter;
@@ -87,7 +87,7 @@ public class Hangman {
     }
 
 
-//    check if the game is finished
+    //    check if the game is finished
     public int game_over(String word, char[] displayed, int trials){
 
         correct = getCorrect();
@@ -120,7 +120,7 @@ public class Hangman {
         return trials;
         }
 
-//        if game is finished, ask player if he wants to play again
+    //        if game is finished, ask player if he wants to play again
     public char replay() {
         System.out.println("Voulez-vous replay ? 'o' ");
         repl = sc.next().charAt(0);
